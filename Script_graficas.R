@@ -1,13 +1,13 @@
 #Código para la sistematización de la información
 
 datos <- read.csv(file="Cuestionario2020.csv",header=TRUE,sep=";")
-datos
 datos$var3<-enc2utf8(datos$var3)
 options(encoding="utf-8")
 library(ggplot2)
 #**************************************** Gráfica de barras *****************************************
 
 #++++++++++++++++++++++++++++++++++++++++++VAR1++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++edades = datos$var1
+edades = datos$ï..var1
 table(edades)
 cortes= c(21,31,41,51,61,71)
 rangos=cut(edades,cortes,right = FALSE)
@@ -18,28 +18,27 @@ d2=data.frame(x=d1$rangos,y=d1$Freq)
 d2$x=factor(d2$x,levels=c("[21,31)","[31,41)","[41,51)","[51,61)","[61,71)"))
 
 ggplot(d2, aes(x,y)) +
-  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Calidad de la comunicación") +ggtitle("¿Cuál es su valoración de la comunicación de los lineamientos por parte\n del MINEDUCYT en el marco de la continuidad educativa?")+theme(plot.title = element_text(hjust = 0.5))
-+ theme_minimal()
+geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Edad") +ggtitle("Rango de edades de los profesores que participaron\n en el llenado del cuestionario")+ theme_minimal()+theme(plot.title = element_text(hjust = 0.5))
+
 
 #ggplot(d2, aes(x,y)) +
  # geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Calidad de la comunicación") +ggtitle("¿Cuál es su valoración de la comunicación de los lineamientos por parte\n del MINEDUCYT en el marco de la continuidad educativa?")+theme(plot.title = element_text(hjust = 0.5))
 #++++++++++++++++++++++++++++++++++++++++++VAR2++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 edades = datos$var2
 table(edades)
-cortes= c(21,31,41,51,61,71)
+cortes= c(1,11,21,31,41)
 rangos=cut(edades,cortes,right = FALSE)
 rangos.freq=table(rangos)
 
 d1=data.frame(rangos.freq)
 d2=data.frame(x=d1$rangos,y=d1$Freq)
-d2$x=factor(d2$x,levels=c("[21,31)","[31,41)","[41,51)","[51,61)","[61,71)"))
+d2$x=factor(d2$x,levels=c("[,)","[,)","[,)","[,)","[,)"))
 
 ggplot(d2, aes(x,y)) +
-  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Calidad de la comunicación") +ggtitle("¿Cuál es su valoración de la comunicación de los lineamientos por parte\n del MINEDUCYT en el marco de la continuidad educativa?")+theme(plot.title = element_text(hjust = 0.5))
+  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Años de servicio") +ggtitle("¿Años de servicio de los profesores que\n participaron en el llenado del cuestionario")+theme(plot.title = element_text(hjust = 0.5))
 + theme_minimal()
 
 #+++++++++++++++++++++++++++++++++++++++++++VAR3+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 d1=data.frame(table(datos$var3))
 d2=data.frame(x=d1$Var1,y=d1$Freq)
 d2$x<-enc2utf8(c("Ahuachapán","Cabañas","Chalatenango","Cuscatlán","La Libertad","La Paz","La Unión","Morazán","San Miguel","San Salvador",
@@ -59,97 +58,136 @@ d2=data.frame(x=d1$Var1,y=d1$Freq)
 d2$x=factor(d2$x,levels=c("Excelente","Muy buena","Regular","Mala"))
 
 ggplot(d2, aes(x,y)) +
-  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Calidad de la comunicación") +ggtitle("¿Cuál es su valoración de la comunicación de los lineamientos por parte\n del MINEDUCYT en el marco de la continuidad educativa?")+theme(plot.title = element_text(hjust = 0.5))+
-  theme_minimal()
-
+  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Valoración") +ggtitle("¿Cuál es su valoración de la comunicación de los lineamientos por\n parte del MINEDUCYT en el marco de la continuidad educativa?")+theme_minimal()+theme(plot.title = element_text(hjust = 0.5))
 #+++++++++++++++++++++++++++++++++++++++++++VAR5+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-d1=data.frame(table(datos$var4))
+d1=data.frame(table(datos$var5))
 d2=data.frame(x=d1$Var1,y=d1$Freq)
 d2$x=factor(d2$x,levels=c("Excelente","Muy buena","Regular","Mala"))
 
 ggplot(d2, aes(x,y)) +
-  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Calidad de la comunicación") +ggtitle("¿Cuál es su valoración de la comunicación de los lineamientos por parte\n del MINEDUCYT en el marco de la continuidad educativa?")+theme(plot.title = element_text(hjust = 0.5))+
-  theme_minimal()
+  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Valoración") +ggtitle("¿cuál es su valoración de la comunicación de los lineamientos por\n parte de ESMATE en el marco de la continuidad educativa? ")+theme_minimal()+theme(plot.title = element_text(hjust = 0.5))
 #+++++++++++++++++++++++++++++++++++++++++++VAR6+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-d1=data.frame(table(datos$var4))
+d1=data.frame(table(datos$var6))
 d2=data.frame(x=d1$Var1,y=d1$Freq)
-d2$x=factor(d2$x,levels=c("Excelente","Muy buena","Regular","Mala"))
+d2$x<-enc2utf8(c("Útil","Muy útil","Nada útil","Poco útil"))
+d2$x=factor(d2$x,levels=c("Muy útil","Útil","Poco útil","Nada útil"))
 
 ggplot(d2, aes(x,y)) +
-  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Calidad de la comunicación") +ggtitle("¿Cuál es su valoración de la comunicación de los lineamientos por parte\n del MINEDUCYT en el marco de la continuidad educativa?")+theme(plot.title = element_text(hjust = 0.5))+
-  theme_minimal()
+  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Valoración") +ggtitle("¿Cuál es su valoración de la utilidad del Libro de texto, Cuaderno de ejercicios\n y Guía metodológica ESMATE para el desarrollo de los contenidos durante\n el periodo de clases no presenciales?")+ theme_minimal()+theme(plot.title = element_text(hjust = 0.5))
 #+++++++++++++++++++++++++++++++++++++++++++VAR7+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-d1=data.frame(table(datos$var4))
+d1=data.frame(table(datos$var7))
 d2=data.frame(x=d1$Var1,y=d1$Freq)
-d2$x=factor(d2$x,levels=c("Excelente","Muy buena","Regular","Mala"))
+d2$x=factor(d2$x,levels=c("Ninguna semana","De 1 a 5 semanas","De 6 a 10 semanas","De 11 a 15 semanas","De 16 a 20 semanas"))
 
 ggplot(d2, aes(x,y)) +
-  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Calidad de la comunicación") +ggtitle("¿Cuál es su valoración de la comunicación de los lineamientos por parte\n del MINEDUCYT en el marco de la continuidad educativa?")+theme(plot.title = element_text(hjust = 0.5))+
-  theme_minimal()
+  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Cantidad de semanas") +ggtitle("De las 20 semanas de la Fase 3, \n¿cuántas semanas indicó a sus estudiantes que vieran las teleclases?")+ theme_minimal()+theme(plot.title = element_text(hjust = 0.5))
 #+++++++++++++++++++++++++++++++++++++++++++VAR8+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-d1=data.frame(table(datos$var4))
+d1=data.frame(table(datos$var8))
 d2=data.frame(x=d1$Var1,y=d1$Freq)
-d2$x=factor(d2$x,levels=c("Excelente","Muy buena","Regular","Mala"))
+d2$x=factor(d2$x,levels=c("Se superaron","Se cumplieron","Bastante","Un poco"))
 
 ggplot(d2, aes(x,y)) +
-  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Calidad de la comunicación") +ggtitle("¿Cuál es su valoración de la comunicación de los lineamientos por parte\n del MINEDUCYT en el marco de la continuidad educativa?")+theme(plot.title = element_text(hjust = 0.5))+
-  theme_minimal()
+  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Percepción") +ggtitle("Respecto a las teleclases, ¿considera que se cumplió con las expectativas de\n contribuir al aprendizaje de sus estudiantes?")+theme_minimal()+theme(plot.title = element_text(hjust = 0.5))
 #+++++++++++++++++++++++++++++++++++++++++++VAR9+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-d1=data.frame(table(datos$var4))
+d1=data.frame(table(datos$var9))
 d2=data.frame(x=d1$Var1,y=d1$Freq)
-d2$x=factor(d2$x,levels=c("Excelente","Muy buena","Regular","Mala"))
+d2$x=factor(d2$x,levels=c("Ninguna semana","De 1 a 5 semanas","De 6 a 10 semanas","De 11 a 15 semanas","De 16 a 20 semanas"))
 
 ggplot(d2, aes(x,y)) +
-  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Calidad de la comunicación") +ggtitle("¿Cuál es su valoración de la comunicación de los lineamientos por parte\n del MINEDUCYT en el marco de la continuidad educativa?")+theme(plot.title = element_text(hjust = 0.5))+
-  theme_minimal()
+  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Cantidad de semanas") +ggtitle("De las 20 semanas de la Fase 3, ¿cuántas semanas asignó a sus estudiantes\n utilizar los sitios web (sites) de matemática?")+ theme_minimal()+theme(plot.title = element_text(hjust = 0.5))
 #+++++++++++++++++++++++++++++++++++++++++++VAR10+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-d1=data.frame(table(datos$var4))
+d1=data.frame(table(datos$var10))
 d2=data.frame(x=d1$Var1,y=d1$Freq)
-d2$x=factor(d2$x,levels=c("Excelente","Muy buena","Regular","Mala"))
+d2$x=factor(d2$x,levels=c("Se superaron","Se cumplieron","Bastante","Un poco"))
 
 ggplot(d2, aes(x,y)) +
-  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Calidad de la comunicación") +ggtitle("¿Cuál es su valoración de la comunicación de los lineamientos por parte\n del MINEDUCYT en el marco de la continuidad educativa?")+theme(plot.title = element_text(hjust = 0.5))+
-  theme_minimal()
-#+++++++++++++++++++++++++++++++++++++++++++VAR11+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-d1=data.frame(table(datos$var4))
-d2=data.frame(x=d1$Var1,y=d1$Freq)
-d2$x=factor(d2$x,levels=c("Excelente","Muy buena","Regular","Mala"))
-
-ggplot(d2, aes(x,y)) +
-  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Calidad de la comunicación") +ggtitle("¿Cuál es su valoración de la comunicación de los lineamientos por parte\n del MINEDUCYT en el marco de la continuidad educativa?")+theme(plot.title = element_text(hjust = 0.5))+
-  theme_minimal()
+  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Percepción") +ggtitle("Respecto a los sitios web (sites), ¿se cumplió con las expectativas de\n contribuir al aprendizaje de sus estudiantes?")+theme_minimal()+theme(plot.title = element_text(hjust = 0.5))
 #+++++++++++++++++++++++++++++++++++++++++++VAR12+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-d1=data.frame(table(datos$var4))
+d1=data.frame(table(datos$var12))
 d2=data.frame(x=d1$Var1,y=d1$Freq)
-d2$x=factor(d2$x,levels=c("Excelente","Muy buena","Regular","Mala"))
+d2$x=factor(d2$x,levels=c("Ninguna semana","De 1 a 5 semanas","De 6 a 10 semanas","De 11 a 15 semanas","De 16 a 20 semanas"))
 
 ggplot(d2, aes(x,y)) +
-  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Calidad de la comunicación") +ggtitle("¿Cuál es su valoración de la comunicación de los lineamientos por parte\n del MINEDUCYT en el marco de la continuidad educativa?")+theme(plot.title = element_text(hjust = 0.5))+
-  theme_minimal()
+  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Cantidad de semanas") +ggtitle("De las 20 semanas de la Fase 3, ¿cuántas semanas indicó a sus estudiantes utilizar\n los videos de matemática colgados en el canal de ESMATE en Youtube?")+ theme_minimal()+theme(plot.title = element_text(hjust = 0.5))#+++++++++++++++++++++++++++++++++++++++++++VAR13+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #+++++++++++++++++++++++++++++++++++++++++++VAR13+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-d1=data.frame(table(datos$var4))
+d1=data.frame(table(datos$var13))
 d2=data.frame(x=d1$Var1,y=d1$Freq)
-d2$x=factor(d2$x,levels=c("Excelente","Muy buena","Regular","Mala"))
+d2$x=factor(d2$x,levels=c("Se superaron","Se cumplieron","Bastante","Un poco"))
 
 ggplot(d2, aes(x,y)) +
-  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Calidad de la comunicación") +ggtitle("¿Cuál es su valoración de la comunicación de los lineamientos por parte\n del MINEDUCYT en el marco de la continuidad educativa?")+theme(plot.title = element_text(hjust = 0.5))+
-  theme_minimal()
+  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Percepción") +ggtitle("Respecto a los videos de matemática del canal ESMATE en Youtube,\n ¿se cumplió con las expectativas de contribuir al aprendizaje de sus estudiantes?")+theme_minimal()+theme(plot.title = element_text(hjust = 0.5))
 #+++++++++++++++++++++++++++++++++++++++++++VAR15+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-d1=data.frame(table(datos$var4))
+d1=data.frame(table(datos$var15))
 d2=data.frame(x=d1$Var1,y=d1$Freq)
-d2$x=factor(d2$x,levels=c("Excelente","Muy buena","Regular","Mala"))
+d2$x<-enc2utf8(c("Útil","Muy útil","Nada útil","Poco útil"))
+d2$x=factor(d2$x,levels=c("Muy útil","Útil","Poco útil","Nada útil"))
 
 ggplot(d2, aes(x,y)) +
-  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Calidad de la comunicación") +ggtitle("¿Cuál es su valoración de la comunicación de los lineamientos por parte\n del MINEDUCYT en el marco de la continuidad educativa?")+theme(plot.title = element_text(hjust = 0.5))+
-  theme_minimal()
+  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Valoración") +ggtitle("¿Cuál es su valoración respecto a la utilidad de los videos de matemática, sitios web (sites) y teleclases ESMATE\n para el desarrollo de los contenidos durante el periodo de clases no presenciales?")+ theme_minimal()+theme(plot.title = element_text(hjust = 0.5))
+#+++++++++++++++++++++++++++++++++++++++++++VAR18+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+d1=data.frame(table(datos$var18))
+d2=data.frame(x=d1$Var1,y=d1$Freq)
+d2$x<-enc2utf8(c("Cuarto grado","Noveno grado","Octavo grado","Primer año de bachillerato","Primer grado","Quinto grado","Séptimo grado","Segundo año de bachillerato","Segundo grado","Sexto grado",
+                 "Tercer grado"))
+d2$x=factor(d2$x,levels=c("Primer grado","Segundo grado","Tercer grado","Cuarto grado","Quinto grado","Sexto grado","Séptimo grado","Octavo grado","Noveno grado","Primer año de bachillerato",
+                          "Segundo año de bachillerato"))
+
+ggplot(d2, aes(x,y)) +
+  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Grados") +ggtitle("Cantidad de profesores que participaron en el sondeo\n según el grado en el que impartieron matemática durante el 2020.")+theme(plot.title = element_text(hjust = 0.5))+
+  theme_minimal() +  theme(plot.title = element_text(hjust = 0.5),axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) 
+#+++++++++++++++++++++++++++++++++++++++++++VAR19+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#//////////////////////////////////////// Primer grado ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#//////////////////////////////////////// Segundo grado ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#//////////////////////////////////////// Tercer grado  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#//////////////////////////////////////// Cuarto grado  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#//////////////////////////////////////// Quinto grado ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#//////////////////////////////////////// Sexto grado ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#//////////////////////////////////////// Séptimo grado ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#//////////////////////////////////////// Octavo grado ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#//////////////////////////////////////// Noveno grado ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#//////////////////////////////////////// Primer año de bachillerato ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#//////////////////////////////////////// Segundo año de bachillerato  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #+++++++++++++++++++++++++++++++++++++++++++VAR20+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-d1=data.frame(table(datos$var4))
+d1=data.frame(table(datos$var20))
 d2=data.frame(x=d1$Var1,y=d1$Freq)
-d2$x=factor(d2$x,levels=c("Excelente","Muy buena","Regular","Mala"))
+d2$x=factor(d2$x,levels=c("Excelente","Muy buena","Buena","Regular","Mala"))
 
 ggplot(d2, aes(x,y)) +
-  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Calidad de la comunicación") +ggtitle("¿Cuál es su valoración de la comunicación de los lineamientos por parte\n del MINEDUCYT en el marco de la continuidad educativa?")+theme(plot.title = element_text(hjust = 0.5))+
-  theme_minimal()
+  geom_bar(stat = "Identity",color="blue", fill=rgb(0,0.65490,0.52549))+ geom_text(aes(label = y), vjust = -0.3, color = "blue")+labs(y="Cantidad de profesores", x = "Valoración") +ggtitle("¿Cómo calificaría su labor docente durante el desarrollo de los contenidos en forma no presencial?")+theme_minimal()+theme(plot.title = element_text(hjust = 0.5))
+#+++++++++++++++++++++++++++++++++++++++++++VAR21+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#//////////////////////////////////////// Primer grado ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#//////////////////////////////////////// Segundo grado ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#//////////////////////////////////////// Tercer grado  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#//////////////////////////////////////// Cuarto grado  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#//////////////////////////////////////// Quinto grado ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#//////////////////////////////////////// Sexto grado ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#//////////////////////////////////////// Séptimo grado ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#//////////////////////////////////////// Octavo grado ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#//////////////////////////////////////// Noveno grado ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#//////////////////////////////////////// Primer año de bachillerato ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#//////////////////////////////////////// Segundo año de bachillerato  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 #********************************* Tabla de doble entrada *************************************
 #Percepción de la utilidad de LT, CE y GM según la edad
 Doble1=data.frame(x=datos$ï..var1,y=datos$var6)
@@ -157,16 +195,12 @@ td1 <- table(Doble1$x,Doble1$y)
 #Percepción de la utilidad de LT, CE y GM según el tiempo de servicio
 Doble2=data.frame(x=datos$var2,y=datos$var6)
 td2 <- table(Doble2$x,Doble2$y)
-#Percepción de la comunicación de esmate según la edad
+#Percepción de la comunicación del mined según la edad
 Doble3=data.frame(x=datos$ï..var1,y=datos$var4)
 td3 <- table(Doble3$x,Doble3$y)
-#Percepción de la comunicación del mined según la edad
+#Percepción de la comunicación de esmate según la edad
 Doble4=data.frame(x=datos$ï..var1,y=datos$var5)
-td3 <- table(Doble3$x,Doble3$y)
-
-
-
-
+td4 <- table(Doble4$x,Doble4$y)
 
 #---------------------------------------Bloques de código descartados-----------------------------
 edades = c(rep(22,4),rep(23,4),rep(25,17),rep(26,17),rep(27,36),rep(28,47),
